@@ -82,8 +82,6 @@ local function updatePlayerXray(playerIndex)
 end
 
 local function init()
-    global.players_xray = global.players_xray or {}
-    global.player_xray_toggle = global.player_xray_toggle or {}
     if done["248k"] ~= 'true' then
         --ensure that we only create xrayed refinery entity when the mod is installed
         if game.active_mods["248k"] then
@@ -99,17 +97,22 @@ script.on_event(defines.events.on_player_created,
     end
 )
 
---script.on_init(
---   function()
---       init()
---    end
---)
+local function initg()
+    global.players_xray = global.players_xray or {}
+    global.player_xray_toggle = global.player_xray_toggle or {}
+end
 
---script.on_load(
---    function()
---        init()
---    end
---)
+script.on_init(
+   function()
+       initg()
+    end
+)
+
+script.on_load(
+    function()
+        initg()
+    end
+)
 
 script.on_event(defines.events.on_lua_shortcut,
     function(event)
