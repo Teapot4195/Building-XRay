@@ -93,17 +93,23 @@ local function init()
     end
 end
 
-script.on_init(
-    function()
+script.on_event(defines.events.on_player_created,
+    function(event)
         init()
     end
 )
 
-script.on_load(
-    function()
-        init()
-    end
-)
+--script.on_init(
+--   function()
+--       init()
+--    end
+--)
+
+--script.on_load(
+--    function()
+--        init()
+--    end
+--)
 
 script.on_event(defines.events.on_lua_shortcut,
     function(event)
