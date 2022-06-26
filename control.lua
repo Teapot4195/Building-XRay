@@ -1,4 +1,5 @@
-require('whitelist')
+local xrayBuildingWhitelist = {}
+local done = {}
 
 local function suffixed(str, ending) -- Taken from bulk-teleport
 	return ending == "" or str:sub(-#ending) == ending
@@ -82,8 +83,14 @@ end
 
 local function init()
     global.players_xray = global.players_xray or {}
-    global.moving_player = global.moving_player or {}
     global.player_xray_toggle = global.player_xray_toggle or {}
+    if done["248k"] ~= 'true' then
+        --ensure that we only create xrayed refinery entity when the mod is installed
+        if game.active_mods["248k"] then
+            table.insert(xrayBuildingWhitelist, "fi_refinery_entity")
+        end
+        done["248k"] = 'true'
+    end
 end
 
 script.on_init(
